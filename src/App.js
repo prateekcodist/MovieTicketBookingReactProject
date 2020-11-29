@@ -1,13 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
+import AppRouter from './AppRouter';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello I am Prateek</h1>
-        
+    <div>
+      <AppRouter />
     </div>
   );
 }
-
 export default App;
