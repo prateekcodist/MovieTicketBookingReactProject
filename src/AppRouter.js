@@ -9,6 +9,7 @@ import MyTickets from './MyTickets';
 import Profile from "./Profile";
 import ShowAdmin from "./ShowAdmin";
 import Login from "./Login";
+import NewAdmin from "./NewAdmin";
 import Logout from "./Logout";
 import Register from "./Register";
 
@@ -81,6 +82,12 @@ class AppRouter extends React.Component {
                       Account
                     </Link>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
+                      {
+                        this.state.role === 'admin' ? 
+                        <Link className="dropdown-item" to="newadmin">
+                          Add new admin
+                        </Link> : ''
+                      }
                       <Link className="dropdown-item" to="profile">
                         Profile
                       </Link>
@@ -104,6 +111,7 @@ class AppRouter extends React.Component {
           <Route path="/profile" component={() => <Profile auth={this.checkLogin} /> } />
           <Route path="/login" component={() => <Login auth={this.checkLogin} createAuth={this.makeLogin} /> } />
           <Route path="/logout" component={() => <Logout auth={this.checkLogin} /> } />
+          <Route paht="/newadmin" component={() => <NewAdmin auth={this.checkLogin} /> } />
           <Route paht="/register" component={() => <Register auth={this.checkLogin} /> } />
           <Route paht="/findMovie" component={() => <MovieCustomer auth={this.checkLogin} /> } />
         </Switch>
