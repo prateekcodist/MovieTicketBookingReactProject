@@ -22,7 +22,7 @@ class Register extends React.Component{
         console.log(this.state.param);
         let resp = null
         try{
-            resp = await axios.post('http://localhost:8082/user/newuser', this.state.param)
+            resp = await axios.post('http://localhost:8080/user/newuser', this.state.param)
         }
         catch(err){
             console.log("Error: ",  err.response.data);

@@ -16,7 +16,7 @@ class AppRouter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      adminMenu: ['movie', 'theatre', 'screen', 'show'],
+      adminMenu: ['movie', 'theatre', 'screen', 'show','booking'],
       userMenu: ['findMovie', 'myTickets']
     };
     this.checkLogin = this.checkLogin.bind(this)
