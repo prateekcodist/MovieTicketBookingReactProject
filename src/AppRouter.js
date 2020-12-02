@@ -12,20 +12,27 @@ import Login from "./Login";
 import NewAdmin from "./NewAdmin";
 import Logout from "./Logout";
 import Register from "./Register";
-import Booking from "./Booking";
+import ShowCustomer from "./ShowCustomer";
 
 class AppRouter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      adminMenu: ['movie', 'theatre', 'screen', 'show','booking'],
+      adminMenu: ['movie', 'theatre', 'screen', 'show'],
       userMenu: ['findMovie', 'myTickets']
     };
     this.checkLogin = this.checkLogin.bind(this)
-    this.makeLogin = this.makeLogin(this)
+    this.makeLogin = this.makeLogin.bind(this)
+    this.checkAdmin = this.checkAdmin.bind(this)
   }
   checkLogin(){
     return this.state.userId !== undefined;
+  }
+  checkAdmin(){
+    if(this.state.role !== 'admin')
+      return false
+    else
+      return true
   }
   makeLogin(){
     this.setState({role: localStorage.role, userId: localStorage.userId});
@@ -79,7 +86,7 @@ class AppRouter extends React.Component {
                 {
                   this.state.role != undefined ? 
                   <li className="nav-item dropdown">
-                    <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
+                    <Link className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
                       Account
                     </Link>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
@@ -87,11 +94,12 @@ class AppRouter extends React.Component {
                         this.state.role === 'admin' ? 
                         <Link className="dropdown-item" to="newadmin">
                           Add new admin
-                        </Link> : ''
+                        </Link>
+                        : 
+                        <Link className="dropdown-item" to="profile">
+                          Profile
+                        </Link>
                       }
-                      <Link className="dropdown-item" to="profile">
-                        Profile
-                      </Link>
                       <Link className="dropdown-item" to="logout">
                         Logout
                       </Link>
@@ -103,18 +111,19 @@ class AppRouter extends React.Component {
           </div>
         </nav>
         <Switch>
-          <Route path="/home" component={() => <Home auth={this.checkLogin}/>} />
-          <Route path="/movie" component={() => <MovieAdmin auth={this.checkLogin} />} />
-          <Route path="/screen" component={() => <ScreenAdmin auth={this.checkLogin}/>} />
-          <Route path="/theatre" component={() => <TheatreAdmin auth={this.checkLogin} /> } />
-          <Route path="/show" component={() => <ShowAdmin auth={this.checkLogin} /> } />
-          <Route path="/myTickets" component={() => <MyTickets auth={this.checkLogin} /> } />
-          <Route path="/profile" component={() => <Profile auth={this.checkLogin} /> } />
-          <Route path="/login" component={() => <Login auth={this.checkLogin} createAuth={this.makeLogin} /> } />
-          <Route path="/logout" component={() => <Logout auth={this.checkLogin} /> } />
-          <Route path="/newadmin" component={() => <NewAdmin auth={this.checkLogin} /> } />
-          <Route path="/register" component={() => <Register auth={this.checkLogin} /> } />
-          <Route paht="/findMovie" component={() => <MovieCustomer auth={this.checkLogin} /> } />
+          <Route exact path="/home" component={() => <Home auth={this.checkLogin}/>} />
+          <Route exact path="/movie" component={() => <MovieAdmin checkAdmin={this.checkAdmin} auth={this.checkLogin} />} />
+          <Route exact path="/screen" component={() => <ScreenAdmin auth={this.checkLogin}/>} />
+          <Route exact path="/theatre" component={() => <TheatreAdmin auth={this.checkLogin} /> } />
+          <Route exact path="/show" component={() => <ShowAdmin auth={this.checkLogin} /> } />
+          <Route exact path="/myTickets" component={() => <MyTickets auth={this.checkLogin} /> } />
+          <Route exact path="/profile" component={() => <Profile auth={this.checkLogin} /> } />
+          <Route exact path="/logout" component={() => <Logout auth={this.checkLogin} /> } />
+          <Route exact path="/login" component={() => <Login auth={this.checkLogin} createAuth={this.makeLogin} /> } />
+          <Route exact path="/register" component={() => <Register auth={this.checkLogin} /> } />
+          <Route exact path="/newadmin" component={() => <NewAdmin auth={this.checkLogin} /> } />
+          <Route exact path="/findMovie" component={() => <MovieCustomer auth={this.checkLogin} /> } />
+          <Route exact path="/findShow" component={() => <ShowCustomer auth={this.checkLogin} /> } />
         </Switch>
       </div>
     );
