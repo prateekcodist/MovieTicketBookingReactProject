@@ -11,6 +11,7 @@ import ShowAdmin from "./ShowAdmin";
 import Login from "./Login";
 import Logout from "./Logout";
 import Register from "./Register";
+import Booking from "./Booking";
 
 class AppRouter extends React.Component {
   constructor(props) {
@@ -104,8 +105,9 @@ class AppRouter extends React.Component {
           <Route path="/profile" component={() => <Profile auth={this.checkLogin} /> } />
           <Route path="/login" component={() => <Login auth={this.checkLogin} createAuth={this.makeLogin} /> } />
           <Route path="/logout" component={() => <Logout auth={this.checkLogin} /> } />
-          <Route paht="/register" component={() => <Register auth={this.checkLogin} /> } />
-          <Route paht="/findMovie" component={() => <MovieCustomer auth={this.checkLogin} /> } />
+          <Route path="/register" component={() => <Register auth={this.checkLogin} /> } />
+          <Route path="/findMovie" component={() => <MovieCustomer auth={this.checkLogin} /> } />
+          <Route path="/booking" component={() => <Booking auth={this.checkLogin}/>} />
         </Switch>
       </div>
     );
