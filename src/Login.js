@@ -28,13 +28,15 @@ class Login extends React.Component{
             // alert('Invalid User Id or password');
         }
         console.log(resp);
-        // axios check then put into localStorage
-            localStorage.setItem('role', this.state.param.role);
+        if(resp != null){
+            localStorage.setItem('role', resp.data.role);
             localStorage.setItem('userId', this.state.param.userId);
+            window.location = '/home';
+        }
             // this.props.createAuth();
             // return <Redirect to="home" />
-        if(resp !== null)
-            window.location = '/home';
+        // if(resp !== null)
+        //     window.location = '/home';
     }
     render(){
         return (
@@ -49,16 +51,6 @@ class Login extends React.Component{
                         <div className="form-group">
                             <label>Password</label>
                             <input type="text" className="form-control" onChange={(e) => this.state.param.password=e.target.value} required/>
-                        </div>
-                        <div className="form-group">
-                            <label>User type</label>
-                            <br />
-                            <span className="mr-1">
-                               <input type="radio" name="usertype" onClick={(e) => this.state.param.role=e.target.value} value="customer" /> Customer
-                            </span>
-                            <span className="ml-3">
-                                <input type="radio" name="usertype" onClick={(e) => this.state.param.role=e.target.value} value="admin" /> Admin
-                            </span>
                         </div>
                         <div className="form-group text-center">
                             <input type="submit" value="login" className="btn pl-5 pr-5 rounded-pill btn-primary" required/>

@@ -10,7 +10,7 @@ class Register extends React.Component{
             param: {
                 User: {
                     password: '',
-                    role: ''
+                    role: 'customer'
                 },
                 name: '',
                 contact: ''
@@ -41,16 +41,6 @@ class Register extends React.Component{
                     <p className="text-success">{this.state.responseMessage}</p>
                     <form className="text-left" onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <label>User type</label>
-                            <br />
-                            <span className="mr-1">
-                               <input type="radio" name="usertype" onClick={(e) => this.state.param.User.role=e.target.value} value="customer" /> Customer
-                            </span>
-                            <span className="ml-3">
-                                <input type="radio" name="usertype" onClick={(e) => this.state.param.User.role=e.target.value} value="admin" /> Admin
-                            </span>
-                        </div>
-                        <div className="form-group">
                             <label>Name</label>
                             <input type="text" className="form-control" onChange={(e)=> {this.state.param.name=e.target.value; this.setState({errorMessage: ''})}} required/>
                         </div>
@@ -63,7 +53,7 @@ class Register extends React.Component{
                             <input type="password" className="form-control" onChange={(e) => this.state.param.User.password=e.target.value} required/>
                         </div>
                         <div className="form-group text-center">
-                            <input type="submit" value="login" className="btn pl-5 pr-5 rounded-pill btn-primary" required/>
+                            <input type="submit" value="Register" className="btn pl-5 pr-5 rounded-pill btn-primary" required/>
                         </div>
                         <div className="form-group">
                             <small>Already have an account? <Link to="login">Login Now</Link></small>

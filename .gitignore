@@ -22,3 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .eslintcache
+src/ScreenAdmin.js
+package-lock.json
+package.json
+debug.log
+src/MovieAdmin.js
+public/index.html
