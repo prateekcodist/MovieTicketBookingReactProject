@@ -21,7 +21,7 @@ class Profile extends React.Component {
           id: response.data.userId,
           username: response.data.customerName,
           contact: response.data.mobileNumber,
-          ticketlist: response.data,
+          ticketlist: response.data.myTickets,
         });
       })
       .catch(function (error) {
@@ -31,31 +31,36 @@ class Profile extends React.Component {
   render() {
     return (
       <div>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-sm-6">
-              <div class="card hovercard">
-                <div class="cardheader"></div>
-                <div class="avatar">
-                  <img
-                    alt=""
-                    src="https://icon-library.com/images/facebook-user-icon/facebook-user-icon-4.jpg"
-                  />
-                </div>
-                <div class="info">
-                  <div class="title">{this.state.username}'s Details</div>
-                  <div class="desc">
-                    <h4>Registered Name:</h4> <h5>{this.state.username}</h5>
-                  </div>
-                  <div class="desc">
-                    <h4>Contact Number:</h4> <h5>{this.state.contact}</h5>
-                  </div>
-                  <div class="desc">
-                    <h4>Tickets Booked:</h4>
-                  </div>
-                </div>
-                <div class="bottom"></div>
-              </div>
+        <div className="bg-light p-3 row" style={{ height: "100vh" }}>
+          <div className="shadow-sm pt-3 mt-3 bg-white rounded col-sm-4 offset-4 text-center">
+            <img
+              src="https://icon-library.com/images/facebook-user-icon/facebook-user-icon-4.jpg"
+              className="rounded-circle"
+              height="100px"
+              width="100px"
+              alt=".."
+            />
+            <hr />
+            <div className="mt-3">
+              <b>Name: </b>
+              {this.state.username}
+              <br />
+              <b>Contact: </b>
+              {this.state.contact}
+            </div>
+            <div className="mt-4">
+              <h6 className="text-left text-secondary">Booked Tickets</h6>
+              {this.state.ticketlist.length !== 0 ? (
+                <ul>
+                  {this.state.ticketlist.map((ticket) => (
+                    <li>{ticket.ticketId}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-danger">
+                  Looks like you haven't booked any ticket yet
+                </p>
+              )}
             </div>
           </div>
         </div>
