@@ -6,8 +6,8 @@ class ScreenAdmin extends React.Component{
     }
     render(){
         return(
-            <div className="p-3 alert alert-info">
-                This is the ScreenAdmin page
+            <div className=" p-3 alert alert-success">
+                This is screen admin
             </div>
         )
     }

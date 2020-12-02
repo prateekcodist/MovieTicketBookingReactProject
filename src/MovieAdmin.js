@@ -53,7 +53,7 @@ class MovieAdmin extends React.Component{
                         // this.state.movieList.length != 0 ?
                         this.state.movieList.map(
                             (movie) => <div className="col-sm-8 bg-white mb-2 border offset-sm-2">
-                            <div className="d-flex align-items-center justify-content-between pl-2">
+                            <div className="">
                                 <div className="border">
                                     <b>
                                         {movie.movieName}                                        
