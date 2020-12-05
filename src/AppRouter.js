@@ -13,18 +13,22 @@ import NewAdmin from "./NewAdmin";
 import Logout from "./Logout";
 import Register from "./Register";
 import ShowCustomer from "./ShowCustomer";
+import ShowBooking from './ShowBooking';
+import MainComp from "./MainComp";
 
 class AppRouter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      adminMenu: ['movie', 'theatre', 'screen', 'show'],
-      userMenu: ['findMovie', 'myTickets']
+      adminMenu: ['movie', 'theatre', 'screen', 'show'], // menu items for the admin
+      userMenu: ['findMovie', 'findShow'] // menu items for the non-admin
     };
     this.checkLogin = this.checkLogin.bind(this)
     this.makeLogin = this.makeLogin.bind(this)
     this.checkAdmin = this.checkAdmin.bind(this)
   }
+
+  // Utility functions to do the login authentication
   checkLogin(){
     return this.state.userId !== undefined;
   }
@@ -38,14 +42,7 @@ class AppRouter extends React.Component {
     this.setState({role: localStorage.role, userId: localStorage.userId});
   }
   componentWillMount(){
-    // localStorage.setItem('type', 'admin');
-    // localStorage.setItem('userId', 12);
-
-    // localStorage.removeItem('type');
-    // localStorage.removeItem('userId');
-    console.log('i am a hero and these are the values: ' , this.state)
-    console.log('check this out: ', this.state.role)
-    this.setState({role: localStorage.role, userId: localStorage.userId});
+    this.setState({role: localStorage.role, userId: localStorage.userId}); // before mounting, set the appropriate role and Id into the state. and this is will be used to display the correct navbar menus
   }
   render() {
     return (
@@ -123,7 +120,9 @@ class AppRouter extends React.Component {
           <Route exact path="/register" component={() => <Register auth={this.checkLogin} /> } />
           <Route exact path="/newadmin" component={() => <NewAdmin auth={this.checkLogin} /> } />
           <Route exact path="/findMovie" component={() => <MovieCustomer auth={this.checkLogin} /> } />
-          <Route exact path="/findShow" component={() => <ShowCustomer auth={this.checkLogin} /> } />
+          <Route exact path="/findShow" component={ShowCustomer} />
+          <Route exact path="/showBooking" component={ShowBooking} />
+          <Route exact path="/" component={MainComp} />
         </Switch>
       </div>
     );
